@@ -42,5 +42,75 @@ services:
       - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
       - REDIS_URL=redis://redis:6379/0
 
+  job_fetcher:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    command: ["python", "-m", "services.job_fetcher.main"]
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
+      - REDIS_URL=redis://redis:6379/0
+
+  matching_engine:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    command: ["python", "-m", "services.matching_engine.main"]
+    ports:
+      - "8002:8002"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
+      - REDIS_URL=redis://redis:6379/0
+
+  resume_engine:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    command: ["python", "-m", "services.resume_engine.main"]
+    ports:
+      - "8003:8003"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
+      - REDIS_URL=redis://redis:6379/0
+
+  apply_engine:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    command: ["python", "-m", "services.apply_engine.main"]
+    ports:
+      - "8004:8004"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
+      - REDIS_URL=redis://redis:6379/0
+
+  notification:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.worker
+    command: ["python", "-m", "services.notification.main"]
+    ports:
+      - "8005:8005"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://job_user:job_password@postgres:5432/job_platform
+      - REDIS_URL=redis://redis:6379/0
+
 volumes:
   postgres_data:
