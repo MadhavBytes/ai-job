@@ -1,0 +1,15 @@
+# Celery Worker Dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY services ./services
+COPY shared ./shared
+COPY agents ./agents
+
+ENV PYTHONUNBUFFERED=1
+
+CMD ["celery", "-A", "services.celery_app", "worker", "--loglevel=info"]
