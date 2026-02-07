@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 import logging
 from typing import List, Dict, Any
 
-from sources import FoorillaJobSource
+from .sources import FoorillaJobSource
 
 app = FastAPI(title="Job Fetcher Service")
 logger = logging.getLogger(__name__)
