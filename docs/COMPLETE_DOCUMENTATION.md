@@ -760,7 +760,7 @@ class Config:
     
     # API Keys
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-    OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:8080")
+    OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
     
     # Timeouts
     JOB_FETCH_TIMEOUT = 30
@@ -944,7 +944,7 @@ REDIS_URL=redis://localhost:6379/0
 
 # API Keys
 OPENAI_API_KEY=your_key_here
-OLLAMA_BASE_URL=http://localhost:8080
+OPENAI_BASE_URL=https://api.openai.com/v1
 
 # Email
 SMTP_HOST=smtp.gmail.com

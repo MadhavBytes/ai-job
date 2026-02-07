@@ -17,14 +17,6 @@ services:
     ports:
       - "6379:6379"
 
-  localai:
-    image: localai/localai:latest
-    ports:
-      - "8080:8080"
-    environment:
-      - DEBUG=false
-    volumes:
-      - localai_models:/models
 
   orchestrator:
     build:
@@ -52,4 +44,3 @@ services:
 
 volumes:
   postgres_data:
-  localai_models:
